@@ -1,0 +1,111 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/extension.css">
+    <link rel="stylesheet" type="text/css" href="css/tipsy.css">
+    <script type="text/javascript" src="js/vendor/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/vendor/socket.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/vendor/spin.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/vendor/tipsy.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/kippt_extension.js" charset="utf-8"></script>
+    <script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+    <style> 
+      body {
+        background: #00b3e9;
+        font-family: Roboto, sans-serif;
+        padding: 20px; }
+      a {
+        color: rgba(255,255,255,.9);
+        display: inline-block;
+        text-decoration:none;
+        font-style: italic;
+        font-weight: 600;
+        padding: 5px 10px;
+        border: 1px solid rgba(0,0,0,.1);
+        margin-top: 20px; }
+      input {
+        -webkit-transition: .3s all ease-in-out;
+        background: rgba(0,0,0,.1);
+        border: 1px solid rgba(0,0,0,.4);
+        border-radius: 1px;
+        color: rgba(255,255,255,1);
+        font-family: Roboto, sans-serif;
+        font-size: 17px;
+        padding: 5px 10px;
+        margin-bottom: 15px; }
+      input:focus {
+        background: rgba(255,255,255,0.0);
+        border: 1px solid rgba(255,255,255,1);
+        color: rgba(255,255,255,1);
+        outline-width: 0px;
+        box-shadow: 0px 0px 6px rgba(255,255,255,1); }
+      ::-webkit-input-placeholder {
+         color: rgba(255,255,255,.7);
+         font-family: Roboto, sans-serif;
+         font-weight: 300;
+         font-style: italic;
+      }
+    </style>
+</head>
+<body>
+    <div id="kippt-frame">
+        
+
+        <style type="text/css">
+          #mainPopup {
+            padding: 10px;
+            height: 200px;
+            width: 400px;
+            font-family: Helvetica, Ubuntu, Arial, sans-serif;
+          }
+          h1 {
+            font-size: 2em;
+          }
+        </style>
+
+        <div id="mainPopup">
+        <h1>Firebase test!</h1>
+        <p>Clicks: <span id="contents"></span></p>
+        </div>
+
+
+
+
+        <div>
+            <input id="id_name" type="text" name="title" maxlength="512" placeholder="Exact Name" value="" />
+        </div>
+        <div>
+            <input id="id_url" type="text" name="title" maxlength="512" placeholder="Exact URL" value="" />
+        </div>
+        <div>
+            <a href="#" id="id_add">Add New</a>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="contentScript.js"></script>
+
+    <script>
+        setTimeout(function() {
+
+          Firebase.enableLogging(true);
+          var myFirebaseData = new Firebase('https://is-leaderboard.firebaseio.com/');
+
+          myFirebaseData.transaction(function(curr) {
+           if (isNaN(parseFloat(curr)))
+             return 1; // initialize to 1.
+           else
+             return curr + 1; // increment.
+          }, function() {
+             // Once the transaction has completed, update the UI (and watch for updates).
+             myFirebaseData.on('value', function(s) {
+               document.getElementById('contents').innerHTML = s.val();
+             });
+          }); 
+
+          console.log('loaded'+ myFirebaseData);
+        }, 1000);
+    </script>
+    
+</body>
+</html>
+
