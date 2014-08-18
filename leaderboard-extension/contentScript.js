@@ -39,7 +39,7 @@ $(function() {
       "Michaela Morgan": "www.youtube.com/embed/8dAPcu_A9eE",   // Alicia Keys - Girl On Fire
       "Mike Brady": "www.youtube.com/embed/L_vpfblTqng",        // Florida State War Chant
       "Jeff Olsen": "www.youtube.com/embed/erqLnJva0HQ",        // Jet - Put Your Money Where Your Mouth Is
-      "Nisha Javeri": "www.youtube.com/v/2HQaBWziYvY&hl=en_US%23&t=135",
+      "Nisha Javeri": "www.youtube.com/v/2HQaBWziYvY?t=135",
       "Dice K": "www.youtube.com/embed/3MUGAxpI0Bc?t=7",        // MOP - Ante Up
       // "Sarah Davis": "www.youtube.com/embed/gXjibzO7ios",
       // "Clark Bakstran": "www.youtube.com/embed/gXjibzO7ios",    // Dynamite Hack - Boyz In The Hood
