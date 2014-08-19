@@ -7,16 +7,56 @@ chrome.extension.onMessage.addListener(
 
 
 Firebase.enableLogging(true);
-var f = new Firebase('https://chrome-sample.firebaseio-demo.com/');
+var fb = new Firebase("https://is-leaderboard.firebaseio.com");
 
-f.transaction(function(curr) {
-  if (isNaN(parseFloat(curr)))
-    return 1; // initialize to 1.
-  else
-    return curr + 1; // increment.
-}, function() {
-    // Once the transaction has completed, update the UI (and watch for updates).
-    f.on('value', function(s) {
-      document.getElementById('contents').innerHTML = s.val();
-    });
-  });
+$(function() {
+	function displaySongs(songs) {
+		/*
+		 * var source   = $("#song_template").html(),
+		template = Handlebars.compile(source);
+		$('#song_container').html(template(songs));
+		 */
+		
+		var users = songs;
+		var $container = $('#song_container ul').empty(),
+			key, user, $line;
+
+		for (key in users) {
+			user = users[key];
+			$line = $('<li></li>');
+			$line.append($('<span></span>').text(user.name));
+			$line.append($('<a></a>').attr('href', user.url).text(user.url));
+			$line.append($('<a>X</a>').click(function(name) {
+				return function() {
+					fb.child(name).set(null);
+				};
+			}(user.name)));
+			$container.append($line);
+		}
+	}
+	
+	fb.on('value', function (snapshot) {
+		console.log(snapshot.val());
+		var songs = snapshot.val();
+		displaySongs(songs);
+	}, function (errorObject) {
+		console.log('The read failed: ' + errorObject.code);
+	});
+	
+	
+	
+	$('#add').click(function() {
+		console.log("Clicked");
+		var name = $('#name').val(),
+			url = $('#url').val();
+		
+		
+		var ref = fb.child(name);
+		ref.set({
+			'name': name,
+			'url': url
+		});
+	});
+	
+	
+});
