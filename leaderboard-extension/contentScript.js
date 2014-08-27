@@ -21,7 +21,9 @@ $(function() {
 	//Add to simulate/spoof deal
 	var name = "Will Smith";
 	$('body').append('<div class="new_deal_inner owner"><span class="name">' + name + '</span></div>');
-	//Reset defaults to db XXX Careful will wipe db
+    */
+    /*
+    //Reset defaults to db XXX Careful will wipe db
 	var songs = {
 			"default": "www.youtube.com/embed/yogLEyrYC48",           // Wu-Tang Clan - CREAM (instrumental)
 			"Joe Caprio": "www.youtube.com/embed/yogLEyrYC48",        // Drake - Started From the Bottom

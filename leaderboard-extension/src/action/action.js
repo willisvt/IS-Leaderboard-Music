@@ -16,7 +16,6 @@ $(function() {
 		template = Handlebars.compile(source);
 		$('#song_container').html(template(songs));
 		 */
-
 		var users = songs;
 		var $container = $('#song_container ul').empty(),
 			key, user, $line;
@@ -34,7 +33,6 @@ $(function() {
 			$container.append($line);
 		}
 	}
-
 	fb.on('value', function (snapshot) {
 		console.log(snapshot.val());
 		var songs = snapshot.val();
