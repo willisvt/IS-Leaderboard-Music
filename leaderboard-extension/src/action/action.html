@@ -59,7 +59,7 @@
       
       #mainPopup {
         padding: 10px;
-        height: 500px;
+        height: 600px;
         width: 700px;
         font-family: Helvetica, Ubuntu, Arial, sans-serif;
       }
@@ -71,22 +71,29 @@
 <body>
     <div id="mainPopup">
         <div>
-            <input id="name" type="text" name="title" maxlength="512" placeholder="Exact Name" value="" />
+            <input id="name" type="text" maxlength="512" placeholder="Exact Name" value="" />
         </div>
         <div>
-            <input id="url" type="text" name="title" maxlength="512" placeholder="Exact URL" value="" />
+            <input id="url" type="text" maxlength="512" placeholder="Exact URL" value="" />
+        </div>
+        <div>
+            <input id="start_time" type="number" maxlength="512" placeholder="Start Time (seconds)" value="" />
+        </div>
+        <div>
+            <input id="duration" type="number" maxlength="512" placeholder="Duration (seconds)" value="" />
         </div>
         <div>
             <a href="#" id="add">Add New</a>
         </div>
-        
+
         <div id="song_container">
             <ul>
             </ul>
         </div>
     </div>
-    
+
     <script src="../lib/jquery-2.1.1.min.js"></script>
+    <script src="../lib/URI.js"></script>
     <script src="../lib/handlebars-v1.3.0.js"></script>
     <script src="../../firebase.js"></script>
     <script src="action.js"></script>

@@ -16,7 +16,7 @@ $(function() {
 		template = Handlebars.compile(source);
 		$('#song_container').html(template(songs));
 		 */
-		
+
 		var users = songs;
 		var $container = $('#song_container ul').empty(),
 			key, user, $line;
@@ -34,7 +34,7 @@ $(function() {
 			$container.append($line);
 		}
 	}
-	
+
 	fb.on('value', function (snapshot) {
 		console.log(snapshot.val());
 		var songs = snapshot.val();
@@ -42,21 +42,19 @@ $(function() {
 	}, function (errorObject) {
 		console.log('The read failed: ' + errorObject.code);
 	});
-	
-	
-	
+
 	$('#add').click(function() {
 		console.log("Clicked");
 		var name = $('#name').val(),
-			url = $('#url').val();
-		
-		
+			url = $('#url').val(),
+            start_time = $('#start_time').val(),
+            duration = $('#duration').val();
 		var ref = fb.child(name);
 		ref.set({
 			'name': name,
-			'url': url
+			'url': url,
+            'start_time': start_time || 0,
+            'duration': duration || 30
 		});
 	});
-	
-	
 });
