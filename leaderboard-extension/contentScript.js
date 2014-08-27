@@ -13,15 +13,17 @@ $(function() {
 
 	var fb = new Firebase("https://is-leaderboard.firebaseio.com");
 
-	$('body').append('<sup>Sup.</sup>');
+	$('body').append('<sup style="display:none;">Sup.</sup>');
 
 	console.log('My Chrome extension is now running...');
 
+    /*
 	//Add to simulate/spoof deal
 	var name = "Will Smith";
 	$('body').append('<div class="new_deal_inner owner"><span class="name">' + name + '</span></div>');
-	
-	/*//Reset defaults to db XXX Careful will wipe db
+    */
+    /*
+    //Reset defaults to db XXX Careful will wipe db
 	var songs = {
 			"default": "www.youtube.com/embed/yogLEyrYC48",           // Wu-Tang Clan - CREAM (instrumental)
 			"Joe Caprio": "www.youtube.com/embed/yogLEyrYC48",        // Drake - Started From the Bottom
@@ -68,13 +70,25 @@ $(function() {
 			newDeal = true;
 
 			var name = $('.owner span.name').text();
-			var url = users[name] && users[name]['url']
-				|| users["default"] && users["default"]['url']
-				|| default_users["default"]['url'];
-			url += '?autoplay=1';
-			console.log(name, url);
 
-			setTimeout(function() { playSound(url); }, 2000);
+            var url = users.default && users.default.url
+				|| default_users.default.url;
+
+            var uri = URI(url),
+                duration = 30;
+            if (users[name]) {
+                var user = users[name];
+                console.log("User", user);
+                uri = URI(user.url);
+                uri.setQuery('start', parseInt(user.start_time));
+                duration = parseInt(user.duration);
+            }
+
+            uri.setQuery('autoplay', 1);
+
+			console.log(name, uri.toString());
+
+			setTimeout(function() { playSound(uri.toString(), duration); }, 2000);
 		} else if (newDeal && $('.new_deal_inner').size() == 0) {
 			newDeal = false;
 			console.log("New deal over");
@@ -83,13 +97,13 @@ $(function() {
 
 	}, 2700);
 
-	function playSound(url) {
+	function playSound(url, duration) {
 		console.log('Start Music');
-		$('sup').html('<iframe id="player" width="420" height="315" src="//' + url + '" frameborder="0" allowfullscreen></iframe>');  
+		$('sup').html('<iframe id="player" width="420" height="315" src="//' + url + '" frameborder="0" allowfullscreen></iframe>');
 		setTimeout(function() {
-			$('sup').html('');  
+			$('sup').html('');
 			console.log('/End Music');
-		}, 30000);  // Plays for a certain amount of time
+		}, duration * 1000);  // Plays for a certain amount of time
 	}
 });
 

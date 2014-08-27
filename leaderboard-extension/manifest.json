@@ -11,7 +11,7 @@
 	],
 	"content_scripts": [{
 		"matches": ["https://*.visual.force.com/apex/isfullscreen"],
-		"js": ["src/lib/jquery-2.1.1.min.js", "contentScript.js", "firebase.js"],
+		"js": ["src/lib/jquery-2.1.1.min.js","src/lib/URI.js","contentScript.js","firebase.js"],
 		"run_at": "document_start"
 	}],
 	"browser_action": {
