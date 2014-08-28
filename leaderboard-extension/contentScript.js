@@ -16,10 +16,9 @@ $(function() {
 	$('body').append('<sup style="display:none;">Sup.</sup>');
 
 	console.log('My Chrome extension is now running...');
-
     /*
 	//Add to simulate/spoof deal
-	var name = "Will Smith";
+	var name = "Nisha Javeri";
 	$('body').append('<div class="new_deal_inner owner"><span class="name">' + name + '</span></div>');
     */
     /*
@@ -75,13 +74,17 @@ $(function() {
 				|| default_users.default.url;
 
             var uri = URI(url),
-                duration = 30;
+                duration;
             if (users[name]) {
                 var user = users[name];
                 console.log("User", user);
                 uri = URI(user.url);
                 uri.setQuery('start', parseInt(user.start_time));
                 duration = parseInt(user.duration);
+            }
+
+            if (!duration) {
+                duration = 30;
             }
 
             uri.setQuery('autoplay', 1);
