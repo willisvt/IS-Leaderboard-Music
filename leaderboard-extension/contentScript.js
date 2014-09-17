@@ -16,12 +16,13 @@ $(function() {
 	$('body').append('<sup style="display:none;">Sup.</sup>');
 
 	console.log('My Chrome extension is now running...');
-    /*
+
+	/*
 	//Add to simulate/spoof deal
-	var name = "Nisha Javeri";
+	var name = "TJ Higgins";
 	$('body').append('<div class="new_deal_inner owner"><span class="name">' + name + '</span></div>');
     */
-    /*
+	/*
     //Reset defaults to db XXX Careful will wipe db
 	var songs = {
 			"default": "www.youtube.com/embed/yogLEyrYC48",           // Wu-Tang Clan - CREAM (instrumental)
@@ -57,7 +58,6 @@ $(function() {
 	};
 	var users = default_users;
 	fb.on('value', function (snapshot) {
-		//console.log(snapshot.val());
 		users = snapshot.val();
 	}, function (errorObject) {
 		console.log('The read failed: ' + errorObject.code);
@@ -73,25 +73,23 @@ $(function() {
             var url = users.default && users.default.url
 				|| default_users.default.url;
 
-            var uri = URI(url),
-                duration;
+
+            var uri = URI(url);
+	    console.log(users, users[name]);
             if (users[name]) {
                 var user = users[name];
                 console.log("User", user);
                 uri = URI(user.url);
                 uri.setQuery('start', parseInt(user.start_time));
-                duration = parseInt(user.duration);
-            }
-
-            if (!duration) {
-                duration = 30;
             }
 
             uri.setQuery('autoplay', 1);
+	    uri.setQuery('auto_play', true);
 
-			console.log(name, uri.toString());
+	url = unescape(uri.toString());
+			console.log(url);
 
-			setTimeout(function() { playSound(uri.toString(), duration); }, 2000);
+			setTimeout(function() { playSound(url); }, 2000);
 		} else if (newDeal && $('.new_deal_inner').size() == 0) {
 			newDeal = false;
 			console.log("New deal over");
@@ -100,13 +98,13 @@ $(function() {
 
 	}, 2700);
 
-	function playSound(url, duration) {
+	function playSound(url) {
 		console.log('Start Music');
 		$('sup').html('<iframe id="player" width="420" height="315" src="//' + url + '" frameborder="0" allowfullscreen></iframe>');
 		setTimeout(function() {
 			$('sup').html('');
 			console.log('/End Music');
-		}, duration * 1000);  // Plays for a certain amount of time
+		}, 30 * 1000);  // Plays for a certain amount of time
 	}
 });
 

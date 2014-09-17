@@ -45,14 +45,12 @@ $(function() {
 		console.log("Clicked");
 		var name = $('#name').val(),
 			url = $('#url').val(),
-            start_time = $('#start_time').val(),
-            duration = $('#duration').val();
+            start_time = $('#start_time').val();
 		var ref = fb.child(name);
 		ref.set({
 			'name': name,
 			'url': url,
-            'start_time': start_time || 0,
-            'duration': duration || 30
+            'start_time': start_time || 0
 		});
 	});
 });
