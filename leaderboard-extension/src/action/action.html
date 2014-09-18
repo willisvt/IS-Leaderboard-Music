@@ -1,92 +1,174 @@
 <html>
 <head>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:900,400,700,700italic,500,300italic,300' rel='stylesheet' type='text/css'>
     <style> 
       body {
         background: #00b3e9;
         font-family: Roboto, sans-serif;
-        padding: 20px; }
-      a {
-        color: rgba(255,255,255,.9);
+        margin: 0px;
+        padding: 0px; }
+
+      li.user {
+        -webkit-transition: .2s all ease-in-out;
+        padding: 1px 5px;
+        border-left: 4px solid rgba(255,255,255,.0);
+        box-shadow: inset 0px 0px 1px rgba(0,0,0,.0);
+        margin-left: -4px;
+        margin-bottom: 0px;
+        opacity: .8;
+        padding-left: 10px;
+        width: 95%;
+      }
+
+      li.user:hover {
+        -webkit-transition: .3s all ease-in-out;
+        border-left: 4px solid rgba(0,0,0,0.7);
+        margin-left: -4px;
+        opacity: 1;
+        /*box-shadow: inset 0px 0px 1px rgba(0,0,0,.5);*/
+      }
+      
+      li.user:hover input {
+        -webkit-transition: .3s all ease-in-out;
+        border: 1px solid rgba(0,0,0,0.2);
+      }
+
+      li.user:hover span {
+        -webkit-transition: .3s all ease-in-out;
+        margin-left: 5px; }
+
+      li.user:hover a.close {
+        -webkit-transition: .3s all ease-in-out;
+        opacity: 1;
+      }
+      li span {
+        -webkit-transition: .3s all ease-in-out;
+        cursor: default;
         display: inline-block;
+        min-width: 130px;
+        margin-left: 10px;
+        font-size: 16px;
+        font-weight: 300; }
+      a.close {
+        -webkit-transition: .7s all ease-in-out .7;
+        border-radius: 30px;
+        opacity: 0;
+        color: rgba(255,255,255,.9);
+        background: rgba(0,0,0,0.1);
+        display: inline-block;
+        float: right;
         text-decoration:none;
-        font-style: italic;
+        /*font-style: italic;*/
         font-weight: 600;
         padding: 5px 10px;
         border: 1px solid rgba(0,0,0,.1);
-        margin-top: 20px; }
-      input {
+        margin: 1px 0px 0px 16px; }
+      a.close:hover {
         -webkit-transition: .3s all ease-in-out;
-        background: rgba(0,0,0,.1);
-        border: 1px solid rgba(0,0,0,.4);
+        background: #e96955; }
+       input {
+        -webkit-transition: .3s all ease-in-out;
+        background: rgba(0,0,0,.0);
+        border: 1px solid rgba(0,0,0,.0);
         border-radius: 1px;
         color: rgba(255,255,255,1);
         font-family: Roboto, sans-serif;
-        font-size: 17px;
+        font-size: 15px;
+        font-weight: 300;
         padding: 5px 10px;
-        margin-bottom: 15px; }
+        margin-bottom: 0px;
+        width: 66%; }
       input:focus {
-        background: rgba(255,255,255,0.0);
-        border: 1px solid rgba(255,255,255,1);
-        color: rgba(255,255,255,1);
-        outline-width: 0px;
-        box-shadow: 0px 0px 6px rgba(255,255,255,1); }
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.5);
+        color: rgba(0,0,0,1);
+        outline-width: 0px; }
       ::-webkit-input-placeholder {
          color: rgba(255,255,255,.7);
          font-family: Roboto, sans-serif;
          font-weight: 300;
-         font-style: italic;
-      }
+         font-style: italic; }
       
+      form {
+        border-top: 1px solid Rgba(0,0,0,0.1);
+        padding: 10px;
+        background: rgba(0, 160, 209,.87);
+        position: fixed;
+        bottom: -16px;
+        width: 100%; }
+      form #name {
+        max-width: 160px; }
+      form #url {
+        max-width: 340px; }
+      form #start_time {
+        text-align: center;
+        max-width: 80px; }
+      form #add {
+        background: rgba(0,0,0,0.2);
+        color: #FFF;
+        border: 0px;
+        border-radius: 1px;
+        width: auto;
+        text-align: center;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 500;
+        padding: 8px 25px;
+        cursor: pointer;
+        float: right;
+        margin-right: 18px; }  
+      form #add:hover,
+      form #add:focus {
+        background: rgba(0,0,0,0.6); }
+
       #song_container {
-        height: 350px;
-        overflow-y: auto;
-      }
+        padding: 5px;
+        padding-bottom: 50px;
+        /*height: 350px;*/
+        overflow-y: auto; }
       #song_container ul {
         list-style: none;
-        padding: 0px;
-      }
+        padding: 0px; }
       #song_container ul li {
-        float: left;
-      }
+        float: left; }
       #song_container ul span {
         color: white;
-        margin-right: 20px;
-      }
+        margin-right: 20px; }
       
       #song_container ul a {
-        margin-right: 20px;
-      }
+        /*margin-right: 20px;*/ }
       
       #mainPopup {
-        padding: 10px;
         height: 600px;
-        width: 700px;
-        font-family: Helvetica, Ubuntu, Arial, sans-serif;
-      }
+        width: 700px; }
       h1 {
-        font-size: 2em;
-      }
+        font-size: 2em; }
+      header {
+        font-size: 24px;
+        background: #333;
+        padding: 13px 15px;
+        margin: 0px;
+        font-weight: 700;
+        color: #FFF;
+        font-style: italic; }
     </style>
 </head>
 <body>
     <div id="mainPopup">
-        <div>
-            <input id="name" type="text" maxlength="512" placeholder="Exact Name" value="" />
-        </div>
-        <div>
-            <input id="url" type="text" maxlength="512" placeholder="Exact URL" value="" />
-        </div>
-        <div>
-            <input id="start_time" type="number" maxlength="512" placeholder="Start Time (seconds)" value="" />
-        </div>
-        <div>
-            <a href="#" id="add">Add New</a>
-        </div>
+        <header>
+          Sales Leaderboard Theme Songs
+        </header>
 
         <div id="song_container">
             <ul>
             </ul>
         </div>
+        <form>
+            <input id="name" type="text" maxlength="512" placeholder="Exact Name" value="" />
+            <input id="url" type="text" maxlength="512" placeholder="Exact URL" value="" />
+            <input id="start_time" type="number" maxlength="512" placeholder="Start" value="" />
+            <input type="submit" id="add" value="Add" />
+        </form>
     </div>
 
     <script src="../lib/jquery-2.1.1.min.js"></script>
@@ -98,7 +180,7 @@
         <ul>
             {{#each users}}
             <li>
-                {{name}}: <a href="{{url}}">{{url}}</a>
+                {{name}}: <input="{{url}}">{{url}}</input>
             </li>
             {{/each}}
         </ul>

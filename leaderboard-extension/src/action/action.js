@@ -22,10 +22,10 @@ $(function() {
 
 		for (key in users) {
 			user = users[key];
-			$line = $('<li></li>');
+			$line = $('<li class="user"></li>');
 			$line.append($('<span></span>').text(user.name));
-			$line.append($('<a></a>').attr('href', user.url).text(user.url));
-			$line.append($('<a>X</a>').click(function(name) {
+			$line.append($('<input></input>').val(user.url));
+			$line.append($('<a class="close">&times;</a>').click(function(name) {
 				return function() {
 					fb.child(name).set(null);
 				};
